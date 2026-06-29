@@ -490,15 +490,18 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     function renderFuelCorr(cells, agg) {
       const values = [];
       const tableValues = new Map();
+      const tooltips = new Map();
       for (const y of META.yTicks) {
         for (const x of META.xTicks) {
           const cell = cells.get(`${y}|${x}`);
           const inj = injMapValue(y, x);
-          const aux = statValue(cell?.fields["Aux AN1 Wide Band"], agg);
+          const auxStats = cell?.fields["Aux AN1 Wide Band"];
+          const aux = statValue(auxStats, agg);
           const value = Number.isFinite(aux) && Number.isFinite(inj) && inj !== 0 ? aux / inj : NaN;
           if (Number.isFinite(value)) {
             values.push(value);
             tableValues.set(`${y}|${x}`, value);
+            tooltips.set(`${y}|${x}`, `Aux AN1 Wide Band Min/Avg/Max: ${formatValue(auxStats.min)} / ${formatValue(auxStats.sum / auxStats.count)} / ${formatValue(auxStats.max)}`);
           }
         }
       }
@@ -515,7 +518,8 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
             html += `<td class="empty">-</td>`;
           } else {
             const style = colorFor(value, minDisplay, maxDisplay);
-            html += `<td style="${style}">${value.toFixed(2)}</td>`;
+            const title = tooltips.get(`${y}|${x}`) ?? "";
+            html += `<td style="${style}" title="${title}">${value.toFixed(2)}</td>`;
           }
         }
         html += "</tr>";
