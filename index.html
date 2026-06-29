@@ -496,12 +496,13 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
           const cell = cells.get(`${y}|${x}`);
           const inj = injMapValue(y, x);
           const auxStats = cell?.fields["Aux AN1 Wide Band"];
+          const mafStats = cell?.fields["Advanced MAFS1"];
           const aux = statValue(auxStats, agg);
           const value = Number.isFinite(aux) && Number.isFinite(inj) && inj !== 0 ? aux / inj : NaN;
           if (Number.isFinite(value)) {
             values.push(value);
             tableValues.set(`${y}|${x}`, value);
-            tooltips.set(`${y}|${x}`, `Aux AN1 Wide Band Min/Avg/Max: ${formatValue(auxStats.min)} / ${formatValue(auxStats.sum / auxStats.count)} / ${formatValue(auxStats.max)}`);
+            tooltips.set(`${y}|${x}`, `MAF Min/Avg/Max: ${formatValue(mafStats.min)} / ${formatValue(mafStats.sum / mafStats.count)} / ${formatValue(mafStats.max)}`);
           }
         }
       }
