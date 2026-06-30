@@ -478,7 +478,9 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
       const html = INJ_MAP.map((row, rowIndex) => {
         const cells = row.map((value, colIndex) => {
           const tag = rowIndex === 0 || colIndex === 0 ? "th" : "td";
-          const text = Number.isFinite(value) ? formatValue(value) : String(value ?? "");
+          const text = Number.isFinite(value)
+            ? (rowIndex === 0 && colIndex > 0 ? value.toFixed(2) : formatValue(value))
+            : String(value ?? "");
           return `<${tag}>${text}</${tag}>`;
         }).join("");
         return `<tr>${cells}</tr>`;
