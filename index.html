@@ -288,17 +288,26 @@
   }
   .font-ctrl button:hover { background: #2b3d50; }
 </style>
+<style>
+  .top-tools { position: fixed; top: 14px; right: 14px; z-index: 50; display: flex; align-items: center; gap: 8px; }
+  .top-tools .font-ctrl { position: static; }
+  .player-link { color: #66c7ff; white-space: nowrap; font-size: 12px; text-decoration: none; }
+  .player-link:hover { color: #9be1ff; text-decoration: underline; }
+  .player-link:visited { color: #b9a7ff; }
+</style>
 </head>
 <body>
+  <div class="top-tools">
+    <a class="player-link" href="powerfc-log-player.html" target="_blank" rel="noopener">PowerFC Log 播放器</a>
   <div class="font-ctrl">
     <button id="fontDecBtn" aria-label="縮小文字">－</button>
     <span id="fontPct">100%</span>
     <button id="fontIncBtn" aria-label="放大文字">＋</button>
   </div>
+  </div>
 
   <h1>Power FC Analyzer V.2026-07-06</h1>
   <div class="subtitle" id="subtitle">EJ207 v6.30 · X軸=Advanced RPM · Y軸=Advanced Load（由小到大）</div>
-  <p><a href="powerfc-log-player.html" target="_blank" rel="noopener">PowerFC Log 播放器</a></p>
 
   <div class="panel">
     <div class="panel-title">資料來源 — 可上傳 .xlsx / CSV / TSV / TXT 檔案；InjMap 與 Airflow Curve 另外支援直接複製 Excel 範圍貼上（貼上後自動套用，範圍超出目前表格的部分會被忽略）</div>
